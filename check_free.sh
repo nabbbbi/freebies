@@ -2,7 +2,7 @@
 
 LIST="$HOME/programming/projects/freebies/list.txt"
 
-# URLs
+# URLs which I have interested
 
 GOG_URL=https://old.reactor.cc/tag/gog+%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/new
 UNITY_URL=https://old.reactor.cc/tag/Unity+%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/new
@@ -25,6 +25,8 @@ ANON=208057
 POST=("$GOG" "$UNITY" "$STEAM" "$EPIC" "$FREE" "$KEY" "$ANON")
 URLS=("$GOG_URL" "$UNITY_URL" "$STEAM_URL" "$EPIC_URL" "$FREE_URL" "$KEY_URL" "$ANON_URL")
 
+# Sed URLS array to newest values
+
 C=0
 
 while read line; do
@@ -34,6 +36,8 @@ done < $LIST
 
 I=0
 B=TRUE
+
+# Infinite loop
 
 while test $B == "TRUE"; do
     for C in {0..6}; do
@@ -45,11 +49,13 @@ while test $B == "TRUE"; do
 	    
 	    POST[$C]=$RESULT
 	    > $LIST
+# Update the list
 	    for N in {0..6}; do
 		echo ${POST[$N]} | cat >> $LIST
 	    done
 	    chromium-browser --new-window ${URLS[C]}
 	fi
     done
+# Wait a minute
     sleep 60
 done
