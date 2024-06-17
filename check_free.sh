@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# author: Gadzhiev Ruslan aka nonchlant__orca
+
 LIST="$HOME/programming/projects/freebies/list.txt"
 
 # URLs which I have interested
@@ -10,7 +12,7 @@ STEAM_URL=https://old.reactor.cc/tag/%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0+steam/
 EPIC_URL=https://old.reactor.cc/tag/EGS+%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/new
 FREE_URL=https://old.reactor.cc/tag/%D0%A5%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/new
 KEY_URL=https://old.reactor.cc/tag/%D0%BA%D0%BB%D1%8E%D1%87%D0%B8+%D0%B8+%D0%BA%D1%83%D0%BF%D0%BE%D0%BD%D1%8B+steam/new
-ANON_URL=https://old.reactor.cc/tag/anon/new
+# ANON_URL=https://old.reactor.cc/tag/anon/new
 
 GOG=134
 UNITY=43
@@ -18,7 +20,7 @@ STEAM=2698
 EPIC=97
 FREE=3658
 KEY=48
-ANON=208057
+#ANON=208057
 
 # Creating arrays
 
@@ -40,7 +42,7 @@ B=TRUE
 # Infinite loop
 
 while test $B == "TRUE"; do
-    for C in {0..6}; do
+    for C in {0..5}; do
 	RESULT=`curl --silent ${URLS[$C]} | grep Сообщений | sed 's/>/\n/g' | sed 's/[</>]/ /g' | awk 'NR==2{print $1}'`
 	# if original values is not matched with result then launch chromium-browser
 	
@@ -50,7 +52,7 @@ while test $B == "TRUE"; do
 	    POST[$C]=$RESULT
 	    > $LIST
 # Update the list
-	    for N in {0..6}; do
+	    for N in {0..5}; do
 		echo ${POST[$N]} | cat >> $LIST
 	    done
 	    chromium-browser --new-window ${URLS[C]}
