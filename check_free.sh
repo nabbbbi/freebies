@@ -12,6 +12,8 @@ STEAM_URL=https://old.reactor.cc/tag/%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0+steam/
 EPIC_URL=https://old.reactor.cc/tag/EGS+%D1%85%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/new
 FREE_URL=https://old.reactor.cc/tag/%D0%A5%D0%B0%D0%BB%D1%8F%D0%B2%D0%B0/new
 KEY_URL=https://old.reactor.cc/tag/%D0%BA%D0%BB%D1%8E%D1%87%D0%B8+%D0%B8+%D0%BA%D1%83%D0%BF%D0%BE%D0%BD%D1%8B+steam/new
+STEAM_KEY_ACTIVATION=https://store.steampowered.com/account/registerkey
+
 # ANON_URL=https://old.reactor.cc/tag/anon/new
 
 GOG=134
@@ -55,7 +57,11 @@ while test $B == "TRUE"; do
 	    for N in {0..5}; do
 		echo ${POST[$N]} | cat >> $LIST
 	    done
-	    chromium-browser --new-window ${URLS[C]}
+	    if test ${URLS[C]} == $STEAM_URL || test ${URLS[C]} == $KEY_URL ; then
+		chromium-browser --new-window ${URLS[C]} && chromium-browser --new-window $STEAM_KEY_ACTIVATION
+	    else
+		chromium-browser --new-window ${URLS[C]}
+	    fi
 	fi
     done
 # Wait a minute
